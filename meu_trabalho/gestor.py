@@ -6,12 +6,13 @@ def main(pagina:ft.Page):
     pagina.window.height = 1000
     pagina.title="Gerenciado de tarefas Godoy"
     pagina.horizontal_alignment = "center"
-    pagina.bgcolor = "#5F5EA8"
+    pagina.bgcolor = "#767686"
 
-    titulo = ft.Text(value="Gerenciador de Tarefas",
-                     font_family= 'Times New Roman',
+    titulo = ft.Text(value="Gerenciador de Tarefas do Godoy",
+                     font_family= 'Arial',
                      color='#FFFFFF',
-                     size=30,)
+                     size=30,
+                     weight=ft.FontWeight.BOLD)
 
     lista_campo_tarefas = []
 
@@ -21,9 +22,13 @@ def main(pagina:ft.Page):
                           bgcolor='#FFFFFFF',
                           border_color='#000000',
                           border_radius= 20,)
+
+    def excluir_campo(campo_tarefa):
+        lista_campo_tarefas.remove(campo_tarefa)
     
     def adicionar_tarefa():
-        lista_campo_tarefas.append(Campo_tarefa(valor=tarefa.value))
+        lista_campo_tarefas.append(Campo_tarefa(valor=tarefa.value,
+                                                funcao_excluir=excluir_campo))
         tarefa.value = ''
 
     botao_adicionar_tarefa = ft.FloatingActionButton(icon=ft.Icons.ADD,

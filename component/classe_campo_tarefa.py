@@ -1,4 +1,5 @@
 import flet as ft
+from model import model_tarefa
 
 
 class Campo_tarefa(ft.Row):
@@ -10,20 +11,15 @@ class Campo_tarefa(ft.Row):
         self.funcao_excluir = funcao_excluir
 
         self.caixa_tarefa_fazer = ft.TextField(value=texto_tarefa,
-                                               border_color="#000000")
+                                               border_color="#000000",
+                                               read_only = True)
     
         self.caixa_estado = ft.Text(value="Pendente")
         
-        def mudar_texto():
-            if self.caixa_estado.value == "Pendente":
-                self.caixa_estado.value = "Concluído"
-                self.container_tudo.bgcolor = "#D9FF1A"
-            elif self.caixa_estado.value == "Concluído":
-                self.caixa_estado.value = "Pendente"
-                self.container_tudo.bgcolor = "#6C73C6"
+        
         
         self.caixa_verificacao = ft.Checkbox(value=0,
-                                             on_change=mudar_texto)
+                                             on_change=self.mudar_texto)
 
         self.caixa_excluir = ft.FloatingActionButton(icon=ft.Icons.DELETE,
                                                      mini=True,
@@ -34,7 +30,8 @@ class Campo_tarefa(ft.Row):
 
         self.caixa_editar = ft.FloatingActionButton(icon=ft.Icons.EDIT,
                                                     mini=True,
-                                                    bgcolor="#FFFFFF" 
+                                                    bgcolor="#FFFFFF",
+                                                    on_click = self.alterar_tarefa 
                                                     )
 
         self.coluna_botoes = ft.Column(controls=[self.caixa_excluir,self.caixa_editar])
@@ -49,6 +46,16 @@ class Campo_tarefa(ft.Row):
 
         self.controls = [self.container_tudo]
 
-
+    def mudar_texto(self):
+                if self.caixa_verificacao.value == True:
+                    self.caixa_estado.value = "Concluído"
+                    self.container_tudo.bgcolor = "#D9FF1A"
+                    model_tarefa.atualizar_status(self.cod_tarefa,"Concluído")
+                else:
+                    self.caixa_estado.value = "Pendente"
+                    self.container_tudo.bgcolor = "#6C73C6"
+                    model_tarefa.atualizar_status(self.cod_tarefa,"Pendente")
+    def alterar_tarefa(self):
+          model_tarefa.atualizar_tarefa(self.cod_tarefa,self.caixa_tarefa_fazer.value)
 
         

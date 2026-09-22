@@ -16,7 +16,7 @@ def inserir_tarefa(texto_tarefa):
 
 def recuperar_tarefas():
     conexao, cursor = conectar_bd()
-    cursor.execute("SELECT * FROM tarefas")
+    cursor.execute("SELECT * FROM tarefas;")
     tarefas = cursor.fetchall()
     conexao.close()
     return tarefas
@@ -30,8 +30,24 @@ def excluir_tarefa(codigo_tarefa):
     conexao.commit()
     conexao.close()
 
-def atualizar_status(codigo_tarefa):
+def atualizar_status(codigo_tarefa, novo_status):
     conexao, cursor  = conectar_bd()
-    cursor.execute("""""")
+    cursor.execute("""
+                    UPDATE tarefas
+                    set status = ?
+                    WHERE cod_tarefa = ?;
+                   """,
+                   [novo_status, codigo_tarefa])
+    conexao.commit()
+    conexao.close()
+
+def atualizar_tarefa(codigo_tarefa, nova_tarefa):
+    conexao, cursor = conectar_bd()
+    cursor.execute("""
+                    UPDATE tarefas
+                    set tarefa = ?
+                    WHERE cod_tarefa = ?;                       
+                  """,
+                  [nova_tarefa,codigo_tarefa])
     conexao.commit()
     conexao.close()

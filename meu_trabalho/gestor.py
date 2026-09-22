@@ -43,6 +43,12 @@ def main(pagina:ft.Page):
     def adicionar_tarefa():
         lista_campo_tarefas.append(Campo_tarefa(valor=tarefa.value,
                                                 funcao_excluir=excluir_campo))
+
+    def atualizar (cod_tarefa,status):
+        lista_campo_tarefas.remove(Campo_tarefa(cod_tarefa,
+                                                status))
+
+
         
 
 
@@ -54,11 +60,11 @@ def main(pagina:ft.Page):
                     VALUES (?,?);
                        ''',
                        [tarefa.value, 'PENDENTE'],)
+        
         conexao.commit()
         conexao.close()
         tarefa.value = ''
         
-        print("HELLO WORLD!")
 
     botao_adicionar_tarefa = ft.FloatingActionButton(icon=ft.Icons.ADD,
                                                      width=30,

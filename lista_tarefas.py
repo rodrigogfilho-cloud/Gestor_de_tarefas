@@ -10,7 +10,7 @@ def main(pagina:ft.Page):
     pagina.window.height = 600
     pagina.title="Lista de Tarefas"
     pagina.horizontal_alignment = "center"
-    pagina.bgcolor = "#A6A9FF"
+    pagina.bgcolor = "#BBE1FF"
 
     criar_bd()
     

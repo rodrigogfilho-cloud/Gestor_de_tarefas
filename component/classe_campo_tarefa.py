@@ -11,8 +11,8 @@ class Campo_tarefa(ft.Row):
         self.funcao_excluir = funcao_excluir
 
         self.caixa_tarefa_fazer = ft.TextField(value=texto_tarefa,
-                                               border_color="#000000",
-                                               read_only = True)
+                                               border_color="#000000"
+                                               )
     
         self.caixa_estado = ft.Text(value="Pendente")
         
@@ -42,18 +42,18 @@ class Campo_tarefa(ft.Row):
 
         self.container_tudo = ft.Container(content=self.linha_tudo,
                                            border_radius=20,
-                                           bgcolor="#6C73C6")
+                                           bgcolor="#66CDFD")
 
         self.controls = [self.container_tudo]
 
     def mudar_texto(self):
                 if self.caixa_verificacao.value == True:
                     self.caixa_estado.value = "Concluído"
-                    self.container_tudo.bgcolor = "#D9FF1A"
+                    self.container_tudo.bgcolor = "#22FF0E"
                     model_tarefa.atualizar_status(self.cod_tarefa,"Concluído")
                 else:
                     self.caixa_estado.value = "Pendente"
-                    self.container_tudo.bgcolor = "#6C73C6"
+                    self.container_tudo.bgcolor = "#28AEFC"
                     model_tarefa.atualizar_status(self.cod_tarefa,"Pendente")
     def alterar_tarefa(self):
           model_tarefa.atualizar_tarefa(self.cod_tarefa,self.caixa_tarefa_fazer.value)

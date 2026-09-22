@@ -28,9 +28,6 @@ class Campo_tarefa(ft.Row):
             elif self.verificacao.value =='Concluído':
                 self.verificacao.value = 'Pendente'
 
-        def alterar_cor ():
-            pass
-
 
         self.caixa_verificacao = ft.Checkbox(on_change=mudar_texto)
 

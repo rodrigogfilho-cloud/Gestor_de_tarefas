@@ -44,9 +44,7 @@ def main(pagina:ft.Page):
         lista_campo_tarefas.append(Campo_tarefa(valor=tarefa.value,
                                                 funcao_excluir=excluir_campo))
 
-    def atualizar (cod_tarefa,status):
-        lista_campo_tarefas.remove(Campo_tarefa(cod_tarefa,
-                                                status))
+    
 
 
         
@@ -64,8 +62,19 @@ def main(pagina:ft.Page):
         conexao.commit()
         conexao.close()
         tarefa.value = ''
-        
 
+    def atualizar (cod_tarefa,novo_status):
+        conexao = neilson.connect('bd_tarefas.sqlite')
+        cursor = conexao.cursor()
+        cursor.execute ('''
+            UPDATE FROM tarefas
+            SET status = ?
+            WHERE cod_tarefa = ?;
+    ''',
+    [novo_status, cod_tarefa])
+        conexao.commit()
+        conexao.close()
+        
     botao_adicionar_tarefa = ft.FloatingActionButton(icon=ft.Icons.ADD,
                                                      width=30,
                                                      height=30,

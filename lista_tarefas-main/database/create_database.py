@@ -1,4 +1,3 @@
-
 import sqlite3
 from database.conexao import conectar_bd
 
